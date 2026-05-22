@@ -1,0 +1,29 @@
+Alex Morgan
+alex.morgan@example.com | (415) 555-0142 | https://github.com/alex-morgan | https://linkedin.com/in/alex-morgan
+
+Summary
+Software engineer with 6 years of experience building production web apps and data pipelines.
+Comfortable across the stack — strongest in TypeScript, React, Node, Python, and Postgres.
+Recently focused on LLM-backed product features (RAG search, structured extraction, evals).
+
+Skills
+TypeScript, React, Next.js, Node.js, Python, Postgres, Prisma, Redis, Docker, AWS,
+OpenAI, LangChain, embeddings, vector search, GraphQL, REST, Tailwind, Playwright, pytest
+
+Experience
+Senior Software Engineer — Lumen Health, 2022 - Present
+- Led the migration of the patient-intake flow from a monolithic Rails app to a Next.js + tRPC architecture, shipping in 9 weeks with zero downtime.
+- Built a RAG pipeline over clinical notes (OpenAI embeddings, pgvector) that reduced provider chart-review time by 38% on internal benchmarks.
+- Mentored two junior engineers; ran weekly design reviews for the platform team (8 people).
+
+Software Engineer — Brightside Logistics, 2020 - 2022
+- Designed and shipped a real-time route-optimization service in Go and Kafka serving 4M events/day at p95 < 60ms.
+- Authored the team's TypeScript style guide; rolled it out across 6 frontend repos.
+- On-call rotation for the warehouse-ops platform.
+
+Software Engineer — Foundry Labs, 2018 - 2020
+- Shipped the first version of the internal feature-flag service, now used by every engineering team at the company.
+- Built data-quality monitors that caught a $2.4M billing bug before customer impact.
+
+Education
+Carnegie Mellon University — B.S. Computer Science, 2018

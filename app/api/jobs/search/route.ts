@@ -5,7 +5,7 @@ import { prisma } from '@/lib/db'
 import { checkLimit, incrementUsage } from '@/lib/usage'
 import { searchJobs } from '@/lib/agents/job-search'
 import { rankJobs } from '@/lib/agents/match-rank'
-import type { ParsedResume } from '@/lib/agents/types'
+import type { MatchedJob, ParsedResume } from '@/lib/agents/types'
 
 const Body = z.object({
   query: z.string().optional(),
@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
 
   const jobs = await searchJobs(parsed.data)
 
-  let ranked = jobs.map((j) => ({ ...j, score: 0, reasons: [] }))
+  let ranked: MatchedJob[] = jobs.map((j) => ({ ...j, score: 0, reasons: [] as string[] }))
   let mode: 'llm' | 'heuristic' | 'unranked' = 'unranked'
   if (parsed.data.resumeId) {
     const resume = await prisma.resume.findFirst({

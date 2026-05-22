@@ -28,7 +28,7 @@ export default function LandingPage() {
           drafts tailored applications — so you spend time interviewing, not
           formatting.
         </p>
-        <div className="mt-10 flex items-center justify-center gap-4">
+        <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link
             href="/sign-up"
             className="rounded-md bg-ja-accent px-6 py-3 font-medium text-white hover:bg-ja-accent-hover"
@@ -36,10 +36,10 @@ export default function LandingPage() {
             Get started free
           </Link>
           <Link
-            href="#pricing"
+            href="/demo"
             className="rounded-md border border-ja-border px-6 py-3 font-medium text-ja-text hover:bg-ja-bg2"
           >
-            See pricing
+            See the agents in action →
           </Link>
         </div>
       </section>

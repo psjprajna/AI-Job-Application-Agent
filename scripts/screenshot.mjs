@@ -1,15 +1,16 @@
 import { chromium } from 'playwright'
 import { mkdir } from 'node:fs/promises'
 
-const url = process.env.URL ?? 'http://localhost:3000'
+const baseUrl = process.env.URL ?? 'http://localhost:3000'
 const outDir = 'public'
 
 await mkdir(outDir, { recursive: true })
 
 const browser = await chromium.launch()
 const shots = [
-  { name: 'og-image.png', width: 1280, height: 640 },
-  { name: 'hero.png', width: 1920, height: 1080 },
+  { name: 'og-image.png', path: '/', width: 1280, height: 640 },
+  { name: 'hero.png', path: '/', width: 1920, height: 1080 },
+  { name: 'demo.png', path: '/demo', width: 1600, height: 1400, fullPage: true },
 ]
 
 for (const shot of shots) {
@@ -18,7 +19,7 @@ for (const shot of shots) {
     deviceScaleFactor: 2,
   })
   const page = await context.newPage()
-  await page.goto(url, { waitUntil: 'networkidle' })
+  await page.goto(`${baseUrl}${shot.path}`, { waitUntil: 'networkidle' })
   await page.addStyleTag({
     content: `
       nextjs-portal, [data-nextjs-toast], #__next-build-watcher,
@@ -29,8 +30,8 @@ for (const shot of shots) {
   })
   await page.waitForTimeout(400)
   const out = `${outDir}/${shot.name}`
-  await page.screenshot({ path: out, fullPage: false })
-  console.log(`wrote ${out} (${shot.width}x${shot.height} @2x)`)
+  await page.screenshot({ path: out, fullPage: Boolean(shot.fullPage) })
+  console.log(`wrote ${out} (${shot.width}x${shot.height} @2x${shot.fullPage ? ' fullPage' : ''})`)
   await context.close()
 }
 
