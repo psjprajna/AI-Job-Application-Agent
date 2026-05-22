@@ -9,7 +9,8 @@
     "lint": "next lint",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
-    "prisma:studio": "prisma studio"
+    "prisma:studio": "prisma studio",
+    "screenshot": "SKIP_CLERK=true next dev -p 5555 & SERVER=$!; until curl -sf -o /dev/null http://localhost:5555/; do sleep 1; done; URL=http://localhost:5555 node scripts/screenshot.mjs; kill $SERVER"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.12.0",
@@ -29,6 +30,7 @@
     "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "autoprefixer": "^10.4.20",
+    "playwright": "^1.60.0",
     "postcss": "^8.5.1",
     "prisma": "^6.2.1",
     "tailwindcss": "^3.4.17",

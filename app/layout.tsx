@@ -9,6 +9,14 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  // SKIP_CLERK=true lets the landing page render without Clerk for screenshots / previews.
+  if (process.env.SKIP_CLERK === 'true') {
+    return (
+      <html lang="en">
+        <body>{children}</body>
+      </html>
+    )
+  }
   return (
     <ClerkProvider>
       <html lang="en">
