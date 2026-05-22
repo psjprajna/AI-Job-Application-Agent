@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+enum Plan {
+  FREE
+  PRO
+}
+
+model User {
+  id                   String    @id
+  email                String    @unique
+  name                 String?
+  plan                 Plan      @default(FREE)
+  stripeCustomerId     String?   @unique
+  stripeSubscriptionId String?   @unique
+  planExpiresAt        DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  usageCounter UsageCounter?
+  resumes      Resume[]
+  applications JobApplication[]
+
+  @@map("users")
+}
+
+model UsageCounter {
+  id              String   @id @default(cuid())
+  userId          String   @unique
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resumeUploads   Int      @default(0)
+  jobSearches     Int      @default(0)
+  coverLetters    Int      @default(0)
+  tailoredResumes Int      @default(0)
+  resetAt         DateTime @default(now())
+
+  @@map("usage_counters")
+}
+
+model Resume {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  rawText   String
+  parsed    String?
+  createdAt DateTime @default(now())
+
+  applications JobApplication[]
+
+  @@map("resumes")
+}
+
+model JobApplication {
+  id              String   @id @default(cuid())
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  resumeId        String?
+  resume          Resume?  @relation(fields: [resumeId], references: [id], onDelete: SetNull)
+  jobTitle        String
+  company         String
+  jobUrl          String?
+  jobDescription  String?
+  matchScore      Float?
+  coverLetter     String?
+  tailoredResume  String?
+  status          String   @default("draft")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@map("job_applications")
+}

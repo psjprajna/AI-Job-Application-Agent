@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ja-bg: #fafaf9;
+  --ja-bg2: #f4f4f2;
+  --ja-bg3: #ffffff;
+  --ja-text: #18181b;
+  --ja-text2: #52525b;
+  --ja-text3: #a1a1aa;
+  --ja-accent: #6d28d9;
+  --ja-accent-hover: #5b21b6;
+  --ja-green: #16a34a;
+  --ja-border: #e4e4e7;
+}
+
+.dark {
+  --ja-bg: #09090b;
+  --ja-bg2: #18181b;
+  --ja-bg3: #1c1c20;
+  --ja-text: #fafafa;
+  --ja-text2: #a1a1aa;
+  --ja-text3: #71717a;
+  --ja-accent: #8b5cf6;
+  --ja-accent-hover: #a78bfa;
+  --ja-green: #22c55e;
+  --ja-border: #27272a;
+}
+
+html,
+body {
+  background: var(--ja-bg);
+  color: var(--ja-text);
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+}
+
+* {
+  border-color: var(--ja-border);
+}
